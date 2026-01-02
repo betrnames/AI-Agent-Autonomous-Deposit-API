@@ -3,373 +3,371 @@
 import { useState } from 'react';
 import { Header } from '@/components/Header';
 import { NodeExchangeIcon } from '@/components/icons';
-import { ExternalLink, Github, Mail, Sun, Search } from 'lucide-react';
-import { Button } from '@/components/ui/button';
-import { Input } from '@/components/ui/input';
-import { Badge } from '@/components/ui/badge';
+import { ExternalLink, Github, Mail, Sun } from 'lucide-react';
 import { Card, CardContent, CardDescription, CardHeader, CardTitle } from '@/components/ui/card';
-import { Tabs, TabsContent, TabsList, TabsTrigger } from '@/components/ui/tabs';
+import { Badge } from '@/components/ui/badge';
+import { Button } from '@/components/ui/button';
 
 interface EcosystemProject {
   name: string;
   description: string;
   link: string;
-  category: string;
-  tags?: string[];
 }
 
-const ecosystemProjects: EcosystemProject[] = [
-  {
-    name: 'Axios Client',
-    description: 'TypeScript reference implementation for x402 payments with Axios',
-    link: 'https://github.com/x402-ai/axios-402',
-    category: 'clients',
-    tags: ['TypeScript', 'SDK']
-  },
-  {
-    name: 'Fetch Client',
-    description: 'Native fetch API client for x402 protocol integration',
-    link: 'https://github.com/x402-ai/fetch-402',
-    category: 'clients',
-    tags: ['JavaScript', 'SDK']
-  },
-  {
-    name: 'Bino',
-    description: 'Autonomous AI agent framework with built-in x402 support',
-    link: 'https://github.com/heurist-network/bino',
-    category: 'clients',
-    tags: ['AI Agents', 'Framework']
-  },
-  {
-    name: 'thirdweb SDK',
-    description: 'Web3 SDK with native support for x402-compatible endpoints',
-    link: 'https://thirdweb.com',
-    category: 'clients',
-    tags: ['Web3', 'SDK']
-  },
-  {
-    name: 'Agent SDK',
-    description: 'Comprehensive toolkit for building x402-enabled AI agents',
-    link: 'https://x402.org',
-    category: 'clients',
-    tags: ['AI', 'SDK']
-  },
-  {
-    name: 'Firecrawl',
-    description: 'Web scraping API with x402 payment integration',
-    link: 'https://firecrawl.dev',
-    category: 'services',
-    tags: ['API', 'Scraping']
-  },
-  {
-    name: 'Neynar',
-    description: 'Farcaster social data APIs powered by x402',
-    link: 'https://neynar.com',
-    category: 'services',
-    tags: ['Social', 'Farcaster']
-  },
-  {
-    name: 'Pinata',
-    description: 'IPFS storage and gateway services via x402 protocol',
-    link: 'https://pinata.cloud',
-    category: 'services',
-    tags: ['Storage', 'IPFS']
-  },
-  {
-    name: 'Heurist AI',
-    description: 'Decentralized AI inference with x402 micropayments',
-    link: 'https://heurist.ai',
-    category: 'services',
-    tags: ['AI', 'Inference']
-  },
-  {
-    name: 'Coinbase AI',
-    description: 'AI-powered crypto services with x402 billing',
-    link: 'https://coinbase.com',
-    category: 'services',
-    tags: ['AI', 'Trading']
-  },
-  {
-    name: 'QuickNode',
-    description: 'Blockchain infrastructure with x402 payment options',
-    link: 'https://quicknode.com',
-    category: 'services',
-    tags: ['Infrastructure', 'RPC']
-  },
-  {
-    name: 'Alchemy',
-    description: 'Web3 development platform supporting x402 billing',
-    link: 'https://alchemy.com',
-    category: 'services',
-    tags: ['Web3', 'Platform']
-  },
-  {
-    name: '0x402.ai',
-    description: 'Cloud infrastructure for x402 facilitators and payment processing',
-    link: 'https://0x402.ai',
-    category: 'infrastructure',
-    tags: ['Cloud', 'Infrastructure']
-  },
-  {
-    name: 'Faremeter',
-    description: 'Lightweight framework for implementing x402 in any application',
-    link: 'https://github.com/faremeter',
-    category: 'infrastructure',
-    tags: ['Framework', 'Tools']
-  },
-  {
-    name: 'Heurist Mesh',
-    description: 'Crypto skills library for AI agents with x402 integration',
-    link: 'https://heurist.ai/mesh',
-    category: 'infrastructure',
-    tags: ['AI', 'Library']
-  },
-  {
-    name: 'x402 Gateway',
-    description: 'Universal payment gateway for x402 protocol integration',
-    link: 'https://gateway.x402.org',
-    category: 'infrastructure',
-    tags: ['Gateway', 'Payments']
-  },
-  {
-    name: 'PaymentVerifier',
-    description: 'Smart contract verification tools for x402 transactions',
-    link: 'https://github.com/x402-ai/verifier',
-    category: 'infrastructure',
-    tags: ['Smart Contracts', 'Security']
-  },
-  {
-    name: 'x402 Middleware',
-    description: 'Express and Next.js middleware for instant x402 integration',
-    link: 'https://github.com/x402-ai/middleware',
-    category: 'infrastructure',
-    tags: ['Middleware', 'Node.js']
-  },
-  {
-    name: 'CDP Facilitator',
-    description: 'Coinbase fee-free USDC facilitator on Base network',
-    link: 'https://coinbase.com',
-    category: 'facilitators',
-    tags: ['Base', 'USDC']
-  },
-  {
-    name: 'Mogami',
-    description: 'Free, developer-focused facilitator for testing and production',
-    link: 'https://mogami.xyz',
-    category: 'facilitators',
-    tags: ['Free', 'Developer']
-  },
-  {
-    name: 'PayAI',
-    description: 'Multi-network facilitator supporting multiple chains and tokens',
-    link: 'https://payai.xyz',
-    category: 'facilitators',
-    tags: ['Multi-chain', 'Tokens']
-  },
-  {
-    name: 'Stripe x402',
-    description: 'Bridge traditional payments to x402 with Stripe integration',
-    link: 'https://stripe.com',
-    category: 'facilitators',
-    tags: ['Fiat', 'Bridge']
-  },
-  {
-    name: 'Documentation',
-    description: 'Complete x402 protocol specification and integration guides',
-    link: 'https://x402.org/docs',
-    category: 'resources',
-    tags: ['Docs', 'Guides']
-  },
-  {
-    name: 'Example Projects',
-    description: 'Open-source examples and starter templates for x402',
-    link: 'https://github.com/x402-ai/examples',
-    category: 'resources',
-    tags: ['Examples', 'Tutorials']
-  },
-  {
-    name: 'Community Forum',
-    description: 'Join the x402 developer community and get support',
-    link: 'https://discord.gg/x402',
-    category: 'resources',
-    tags: ['Community', 'Support']
-  },
-  {
-    name: 'Video Tutorials',
-    description: 'Step-by-step video guides for building with x402',
-    link: 'https://youtube.com/@x402',
-    category: 'resources',
-    tags: ['Videos', 'Learning']
-  }
-];
+const ecosystemData = {
+  clients: [
+    { name: 'Axios & Fetch Clients', description: 'Reference TypeScript clients for x402 using both Axios and Fetch', link: 'https://github.com/coinbase/x402/tree/main/examples/typescript/clients' },
+    { name: 'Bino', description: 'The autonomous AI agent framework. Consumes x402 paywalled services to collaborate', link: 'https://github.com/iotexproject/binoSwarm/tree/main/packages/plugin-swarm' },
+    { name: 'Ekai Labs', description: 'Universal context layer for AI. Keep context portable, persistent and yours', link: 'https://ekailabs.xyz' },
+    { name: 'Genbase', description: 'Next-gen AI video platform with x402', link: 'https://genbase.fun' },
+    { name: 'Mogami Java Client SDK', description: 'Makes it easy to bring x402 payments into your Java application', link: 'https://mogami.tech/#clientSDK' },
+    { name: 'Nuwa AI', description: 'User-friendly AI client that connects you to x402-compatible AI services', link: 'https://nuwa.dev/' },
+    { name: 'Subnano', description: 'Micropayment content platform enabling creators to earn instantly', link: 'https://subnano.me/' },
+    { name: 'thirdweb', description: 'Client side TypeScript SDK and HTTP API to pay for any x402 compatible endpoint', link: 'https://portal.thirdweb.com/payments/x402/client' },
+    { name: 'AI Frens by Treasure', description: 'Launch x402-compatible AI character token and grow with community', link: 'https://aifrens.lol' },
+    { name: 'Tweazy', description: 'Best way to read tweets onchain / Powered by x402, MCP & CDP Smart Wallets', link: 'https://github.com/aaronjmars/tweazy' }
+  ],
+  services: [
+    { name: 'AEON', description: 'Omnichain settlement layer enabling AI agents to pay merchants across SEA, LATAM, Africa', link: 'https://aeon.xyz/AIPayment' },
+    { name: 'AiMo Network', description: 'Permissionless API connecting humans, AI agents, and service providers without gatekeepers', link: 'https://aimo.network' },
+    { name: 'AIsa', description: 'Resource marketplace aggregating LLMs and data APIs based on HTTP 402 standard', link: 'https://aisa.one' },
+    { name: 'AurraCloud', description: 'AI agents hosting platform with MCP, smartWallets, OpenAI API compatibility and x402', link: 'https://aurracloud.com/x402' },
+    { name: 'Cybercentry', description: 'AI-powered security endpoints structured around Compliance, Intelligence, Protection', link: 'https://cybercentry.gitbook.io/cybercentry/documents/x402-cybercentry' },
+    { name: 'Elsa x402', description: 'DeFi API endpoints with x402 micropayments. Access portfolio data, token prices', link: 'https://x402.heyelsa.ai' },
+    { name: 'Firecrawl', description: 'Web scraping API that allows you to turn websites into LLM-ready data', link: 'https://firecrawl.dev' },
+    { name: 'Gloria AI', description: 'AI-powered provider of real-time, high-signal, customizable news data to AI agents', link: 'https://itsgloria.ai' },
+    { name: 'Grove API', description: 'Unified API you can /fund using x402 to /tip anyone on the internet', link: 'https://grove.city/api' },
+    { name: 'Heurist Deep Research', description: 'Web3 native AI research platform. Pay per-query for comprehensive reports', link: 'https://research.heurist.ai' },
+    { name: 'Imagine', description: 'Coin it once, remix forever. Use API to generate media using templates', link: 'https://imagineclub.gitbook.io/docs/' },
+    { name: 'Minifetch', description: 'Fetch rich, structured metadata from web pages with pay-as-you-go micropayments', link: 'https://minifetch.com' },
+    { name: 'Neynar', description: 'Powering social data on Farcaster for agents and humans. Get cast info and more', link: 'https://neynar.com' },
+    { name: 'Onchain', description: "x402's Intelligent Intermediary Layer for Aggregating Facilitators", link: 'https://onchain.fi' },
+    { name: 'Otto AI Agent Swarm', description: 'AI-powered crypto intelligence. Real-time news, token analysis, market signals', link: 'https://docs.ottowallet.xyz/introduction/otto-ai-swarm' },
+    { name: 'Pinata', description: 'Account-free IPFS uploads/retrievals using crypto payments powered by x402', link: 'https://402.pinata.cloud/' },
+    { name: 'Proofivy', description: 'Attestation and x402 paywalled publishing via WordPress plugin or custom tools', link: 'https://proofivy.com' },
+    { name: 'Questflow', description: 'Orchestration layer for multi-agent economy. Orchestrate agents autonomously on-chain', link: 'https://questflow.ai' },
+    { name: 'QuickSilver', description: 'Bridge between physical systems and AI for real-world applications', link: 'https://data.iotex.ai' },
+    { name: 'SerenAI x402 Gateway', description: 'Production gateway enabling AI agents to pay for database queries via x402', link: 'https://serendb.com' },
+    { name: 'SLAMai', description: 'Definitive platform for smart money intelligence with APIs and MCP layer for agents', link: 'https://www.slamai.xyz/' },
+    { name: 'Snack Money API', description: 'Micropayment platform for X, Farcaster, baseapp and verifiable identities', link: 'https://api.snack.money/docs' },
+    { name: 'tip.md', description: 'Crypto tipping service enabling AI assistants to send cryptocurrency tips via chat', link: 'https://www.tip.md/documentation?tab=mcp-server' },
+    { name: 'Zyte API', description: 'Unified Web Scraping API for unblocking, browser rendering and extraction', link: 'https://python-zyte-api.readthedocs.io/en/stable/use/x402.html' }
+  ],
+  infrastructure: [
+    { name: '0x402.ai', description: 'Premier Cloud Infrastructure for x402. Become facilitator in seconds', link: 'https://0x402.ai' },
+    { name: '1Shot API', description: 'General purpose facilitator to monetize n8n workflows with favorite ERC-20 token', link: 'https://docs.1shotapi.com/automation/n8n.html#monetize-n8n-workflows-with-x402' },
+    { name: '402104', description: 'Generate expirable, paywalled links to private ANS-104 DataItems on Arweave', link: 'https://402.load.network' },
+    { name: 'AltLayer', description: 'Provides x402 suite including gateway, facilitator, decentralized agent hosting', link: 'https://altlayer.io/' },
+    { name: 'Cascade', description: 'Revenue distribution infrastructure for Solana and Base. Split payments', link: 'https://cascade.fyi' },
+    { name: 'CodeNut', description: 'Web3 vibe-coding platform for building and deploying x402-enabled applications', link: 'https://www.codenut.ai/x402' },
+    { name: 'DappLooker AI', description: 'Unified on-chain/market intelligence APIs with native x402 support', link: 'https://dapplooker.ai/' },
+    { name: 'Daydreams Router', description: 'x402 enabled LLM inference for agents and applications', link: 'https://router.daydreams.systems' },
+    { name: 'Faremeter', description: 'Lightweight OSS x402 framework powered by client-, middleware-, server-side plugins', link: 'https://faremeter.xyz' },
+    { name: 'Fluora', description: 'MonetizedMCP marketplace enabling AI agents to autonomously find and purchase services', link: 'https://www.fluora.ai/' },
+    { name: 'FluxA', description: 'Permissionless deferred payment rails for x402. Fast parallel stablecoin micropayments', link: 'https://fluxapay.xyz' },
+    { name: 'Heurist Mesh', description: 'Library of composable crypto skills for AI agents. MCP and x402 support', link: 'https://mesh.heurist.ai/' },
+    { name: 'Latinum Agentic Commerce', description: 'Open-source MCP wallet and facilitator for agents to pay x402 requests', link: 'https://latinum.ai' },
+    { name: 'Locus', description: 'MCP-enabled wallet for controlling agent spending with auto-generated x402 endpoint tools', link: 'https://paywithlocus.com' },
+    { name: 'MCP Server Example', description: 'Reference implementation MCP server and wallet to call x402 endpoints', link: 'https://github.com/coinbase/x402/tree/main/examples/typescript/mcp' },
+    { name: 'MCPay', description: 'Build and monetize MCP servers', link: 'https://mcpay.tech' },
+    { name: 'Meridian', description: 'Multi-chain facilitator with developer-first features', link: 'https://mrdn.finance' },
+    { name: 'Meson x402', description: 'Chrome extension to connect EVM & Solana wallets, test x402 interfaces', link: 'https://chromewebstore.google.com/detail/meson-x402/ppdppbgbdlnnmompceomhadjminblalp' },
+    { name: 'Mogami Java Server SDK', description: 'Turn any endpoint into pay-per-call API using x402 protocol', link: 'https://mogami.tech/#serverSDK' },
+    { name: 'Node Servers', description: 'Reference x402 implementations in Node.js using Hono, Express, advanced examples', link: 'https://github.com/coinbase/x402/tree/main/examples/typescript/servers' },
+    { name: 'PredictOS', description: 'Open-source framework for deploying AI agents for prediction markets', link: 'https://github.com/PredictionXBT/PredictOS/blob/main/docs/features/x402-integration.md' },
+    { name: 'Proxy402', description: 'Turn your URLs into paid content. Set price, share link, collect payments instantly', link: 'https://proxy402.com/' },
+    { name: 'x402-secure', description: 'Real-time risk control for AI-driven x402 payments with fraud prevention', link: 'https://x402-secure.t54.ai/' },
+    { name: 'thirdweb', description: 'Server side TypeScript SDK and facilitator API supporting 170+ chains, 4000+ tokens', link: 'https://portal.thirdweb.com/payments/x402/facilitator' },
+    { name: 'TokenMesa', description: 'Launch service-backed token based on x402 with auto token conversion', link: 'https://www.tokenmesa.com' },
+    { name: 'X402 Kit', description: 'Fully modular Rust SDK for building complex x402 payment integrations', link: 'https://github.com/AIMOverse/x402-kit' },
+    { name: 'x402 Market', description: 'Permissionless Launchpad for x402-Enabled Services by AWE Network', link: 'https://x402.world.fun' },
+    { name: 'x402list.fun', description: 'Discover and analyze x402 services ecosystem. Search, compare pricing and metrics', link: 'https://x402list.fun' },
+    { name: 'x402scan', description: 'Ecosystem explorer for x402 resources and analytics', link: 'https://x402scan.com' },
+    { name: 'x402station', description: 'Leading x402 analytics platform with UI for monitoring services', link: 'https://x402station.com/' },
+    { name: 'ZeroPay', description: 'Open crypto payment gateway for humans and AI agents', link: 'https://zpaynow.com' },
+    { name: 'zkStash', description: 'Permissionless Shared Memory Layer for agents with native x402 payment support', link: 'https://zkstash.ai' }
+  ],
+  resources: [
+    { name: 'Mogami Examples', description: 'Learn x402 in Java with real client, server, and hosted examples', link: 'https://mogami.tech/#examples' },
+    { name: 'x402 Example Gallery', description: 'Collection of x402 examples including Next.js, Go Proxy, agent use-cases', link: 'https://github.com/coinbase/x402/tree/main/examples/typescript' }
+  ],
+  facilitators: [
+    { name: 'CDP Facilitator', description: 'Best-in-class x402 facilitator. Fee-free USDC settlement on Base Mainnet', link: 'https://docs.cdp.coinbase.com/x402/docs/quickstart-sellers' },
+    { name: 'Corbits', description: 'Production grade facilitator supporting multi-network, multi-token payment schemes', link: 'https://corbits.dev' },
+    { name: 'Mogami Facilitator', description: 'Free, developer-focused, production-ready facilitator for x402 payments', link: 'https://facilitator.mogami.tech' },
+    { name: 'OpenX402.ai Facilitator', description: 'First permissionless, gasless and omnichain x402 facilitator', link: 'https://openx402.ai' },
+    { name: 'PayAI Facilitator', description: 'Accept x402 payments on all networks including Avalanche, Base, Polygon, Solana', link: 'https://facilitator.payai.network' },
+    { name: 'Treasure Facilitator', description: 'x402 Facilitator on Base and Base Sepolia. Supports EIP-3009 tokens', link: 'https://x402.treasure.lol' },
+    { name: 'WorldFun Facilitator', description: 'Fee-free EIP-3009 payments in USDC and ERC-20 tokens on Base', link: 'https://facilitator.world.fun' },
+    { name: 'x402.org Facilitator', description: 'Default testnet facilitator for x402', link: 'https://x402.org' },
+    { name: 'x402.rs Facilitator', description: 'Independent, open-source facilitator in Rust. Easy self-host or hosted', link: 'https://facilitator.x402.rs' }
+  ]
+};
 
 const categories = [
-  { id: 'all', label: 'All Projects', count: ecosystemProjects.length },
-  { id: 'clients', label: 'Client Integrations', count: ecosystemProjects.filter(p => p.category === 'clients').length },
-  { id: 'services', label: 'Services & APIs', count: ecosystemProjects.filter(p => p.category === 'services').length },
-  { id: 'infrastructure', label: 'Infrastructure', count: ecosystemProjects.filter(p => p.category === 'infrastructure').length },
-  { id: 'facilitators', label: 'Facilitators', count: ecosystemProjects.filter(p => p.category === 'facilitators').length },
-  { id: 'resources', label: 'Resources', count: ecosystemProjects.filter(p => p.category === 'resources').length }
+  { id: 'clients', label: 'Client Integrations', count: ecosystemData.clients.length },
+  { id: 'services', label: 'Services & APIs', count: ecosystemData.services.length },
+  { id: 'infrastructure', label: 'Infrastructure & Tooling', count: ecosystemData.infrastructure.length },
+  { id: 'resources', label: 'Learning & Resources', count: ecosystemData.resources.length },
+  { id: 'facilitators', label: 'Facilitators', count: ecosystemData.facilitators.length }
 ];
 
 export default function EcosystemPage() {
-  const [searchQuery, setSearchQuery] = useState('');
-  const [selectedCategory, setSelectedCategory] = useState('all');
+  const [activeSection, setActiveSection] = useState('clients');
 
-  const filteredProjects = ecosystemProjects.filter(project => {
-    const matchesSearch = project.name.toLowerCase().includes(searchQuery.toLowerCase()) ||
-                         project.description.toLowerCase().includes(searchQuery.toLowerCase()) ||
-                         project.tags?.some(tag => tag.toLowerCase().includes(searchQuery.toLowerCase()));
-    const matchesCategory = selectedCategory === 'all' || project.category === selectedCategory;
-    return matchesSearch && matchesCategory;
-  });
+  const scrollToSection = (sectionId: string) => {
+    setActiveSection(sectionId);
+    const element = document.getElementById(sectionId);
+    if (element) {
+      const offset = 100;
+      const elementPosition = element.getBoundingClientRect().top;
+      const offsetPosition = elementPosition + window.scrollY - offset;
+      window.scrollTo({
+        top: offsetPosition,
+        behavior: 'smooth'
+      });
+    }
+  };
 
   return (
     <div className="min-h-screen bg-gradient-to-b from-black via-slate-950 to-black">
       <Header />
 
-      <div className="relative overflow-hidden">
-        <div className="absolute inset-0 bg-[radial-gradient(circle_at_30%_20%,rgba(59,130,246,0.15),transparent_50%)]" />
-        <div className="absolute inset-0 bg-[radial-gradient(circle_at_70%_60%,rgba(59,130,246,0.1),transparent_50%)]" />
-
-        <div className="relative max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 pt-32 pb-20">
-          <div className="text-center mb-12">
-            <div className="inline-flex items-center gap-2 bg-blue-500/10 border border-blue-500/20 rounded-full px-4 py-2 mb-6">
-              <div className="h-2 w-2 bg-blue-500 rounded-full animate-pulse" />
-              <span className="text-blue-400 text-sm font-bold uppercase tracking-wider">x402 Ecosystem</span>
-            </div>
-
-            <h1 className="text-5xl sm:text-6xl lg:text-7xl font-black tracking-tight mb-6">
-              <span className="text-white">Built on</span>
-              <br />
-              <span className="bg-gradient-to-r from-blue-400 via-blue-500 to-blue-600 text-transparent bg-clip-text">
-                x402 Protocol
-              </span>
-            </h1>
-
-            <p className="text-xl text-gray-400 max-w-3xl mx-auto leading-relaxed">
-              Discover innovative projects, tools, and applications built by our growing community of partners and developers leveraging x402 technology.
-            </p>
-          </div>
-
-          <div className="max-w-2xl mx-auto mb-12">
-            <div className="relative">
-              <Search className="absolute left-4 top-1/2 -translate-y-1/2 h-5 w-5 text-gray-400" />
-              <Input
-                type="text"
-                placeholder="Search projects, tools, or services..."
-                value={searchQuery}
-                onChange={(e) => setSearchQuery(e.target.value)}
-                className="pl-12 h-14 bg-slate-800/60 border-blue-400/30 text-white placeholder:text-gray-500 focus-visible:ring-1 focus-visible:ring-blue-500"
-              />
-            </div>
-          </div>
-        </div>
-      </div>
-
-      <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 pb-20">
-        <Tabs value={selectedCategory} onValueChange={setSelectedCategory} className="w-full">
-          <TabsList className="w-full bg-slate-900/50 border border-slate-800 p-1 h-auto flex-wrap justify-start gap-2 mb-12">
-            {categories.map((category) => (
-              <TabsTrigger
-                key={category.id}
-                value={category.id}
-                className="data-[state=active]:bg-blue-600 data-[state=active]:text-white px-6 py-3 rounded-lg text-sm font-bold uppercase tracking-wider"
-              >
-                {category.label}
-                <Badge variant="secondary" className="ml-2 bg-slate-800 text-gray-400">
-                  {category.count}
-                </Badge>
-              </TabsTrigger>
-            ))}
-          </TabsList>
-
-          <TabsContent value={selectedCategory} className="mt-0">
-            {filteredProjects.length === 0 ? (
-              <div className="text-center py-20">
-                <div className="inline-flex items-center justify-center w-16 h-16 rounded-full bg-slate-800/50 mb-4">
-                  <Search className="h-8 w-8 text-gray-500" />
-                </div>
-                <h3 className="text-xl font-bold text-white mb-2">No projects found</h3>
-                <p className="text-gray-400">Try adjusting your search or filters</p>
-              </div>
-            ) : (
-              <div className="grid md:grid-cols-2 lg:grid-cols-3 gap-6">
-                {filteredProjects.map((project, index) => (
-                  <Card
-                    key={index}
-                    className="bg-slate-900/50 border-slate-800 hover:border-blue-500/50 transition-all duration-300 hover:shadow-lg hover:shadow-blue-500/10 group"
+      <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 pt-24 pb-20">
+        <div className="flex gap-8">
+          <aside className="hidden lg:block w-64 flex-shrink-0">
+            <div className="sticky top-24">
+              <h2 className="text-white font-black text-lg mb-4 uppercase tracking-wider">Categories</h2>
+              <nav className="space-y-1">
+                {categories.map((category) => (
+                  <button
+                    key={category.id}
+                    onClick={() => scrollToSection(category.id)}
+                    className={`w-full text-left px-4 py-3 rounded-lg transition-all duration-200 flex items-center justify-between group ${
+                      activeSection === category.id
+                        ? 'bg-blue-600 text-white'
+                        : 'text-gray-400 hover:text-white hover:bg-slate-800/50'
+                    }`}
                   >
-                    <CardHeader>
-                      <div className="flex items-start justify-between mb-2">
-                        <CardTitle className="text-white group-hover:text-blue-400 transition-colors">
-                          {project.name}
-                        </CardTitle>
-                        <ExternalLink className="h-4 w-4 text-gray-500 group-hover:text-blue-400 transition-colors flex-shrink-0 ml-2" />
-                      </div>
-                      <CardDescription className="text-gray-400 leading-relaxed">
-                        {project.description}
-                      </CardDescription>
-                    </CardHeader>
-                    <CardContent>
-                      <div className="flex flex-wrap gap-2 mb-4">
-                        {project.tags?.map((tag, tagIndex) => (
-                          <Badge
-                            key={tagIndex}
-                            variant="outline"
-                            className="border-blue-500/30 text-blue-400 text-xs"
-                          >
-                            {tag}
-                          </Badge>
-                        ))}
-                      </div>
-                      <Button
-                        asChild
-                        variant="outline"
-                        className="w-full border-blue-500/30 text-blue-400 hover:bg-blue-500/10 hover:text-blue-300"
-                      >
-                        <a href={project.link} target="_blank" rel="noopener noreferrer">
-                          View Project
-                        </a>
-                      </Button>
-                    </CardContent>
-                  </Card>
+                    <span className="text-sm font-semibold">{category.label}</span>
+                    <Badge
+                      variant="secondary"
+                      className={`${
+                        activeSection === category.id
+                          ? 'bg-blue-700 text-white'
+                          : 'bg-slate-800 text-gray-400 group-hover:bg-slate-700'
+                      }`}
+                    >
+                      {category.count}
+                    </Badge>
+                  </button>
                 ))}
-              </div>
-            )}
-          </TabsContent>
-        </Tabs>
+              </nav>
+            </div>
+          </aside>
 
-        <div className="mt-20 text-center">
-          <Card className="bg-gradient-to-br from-blue-900/20 to-blue-950/20 border-blue-500/30 max-w-4xl mx-auto">
-            <CardHeader>
-              <CardTitle className="text-3xl font-black text-white mb-4">
-                Build with x402
-              </CardTitle>
-              <CardDescription className="text-gray-300 text-lg">
-                Join the growing ecosystem of developers building the future of machine-to-machine payments. Get started with our SDK and documentation.
-              </CardDescription>
-            </CardHeader>
-            <CardContent className="flex flex-col sm:flex-row gap-4 justify-center">
-              <Button
-                asChild
-                size="lg"
-                className="bg-blue-600 hover:bg-blue-700 text-white font-bold uppercase tracking-wider"
-              >
-                <a href="/docs">Read Documentation</a>
-              </Button>
-              <Button
-                asChild
-                size="lg"
-                variant="outline"
-                className="border-blue-500/30 text-blue-400 hover:bg-blue-500/10"
-              >
-                <a href="https://github.com/x402-ai" target="_blank" rel="noopener noreferrer">
-                  View on GitHub
-                </a>
-              </Button>
-            </CardContent>
-          </Card>
+          <main className="flex-1">
+            <div className="mb-12">
+              <h1 className="text-4xl sm:text-5xl font-black text-white mb-4">
+                x402 Ecosystem
+              </h1>
+              <p className="text-xl text-gray-400 leading-relaxed">
+                Discover innovative projects, tools, and applications built by our growing community of partners and developers.
+              </p>
+            </div>
+
+            <div className="space-y-16">
+              <section id="clients">
+                <h2 className="text-3xl font-black text-white mb-6 uppercase tracking-tight border-b border-slate-800 pb-4">
+                  Client Integrations
+                </h2>
+                <div className="grid md:grid-cols-2 gap-6">
+                  {ecosystemData.clients.map((project, index) => (
+                    <Card
+                      key={index}
+                      className="bg-slate-900/50 border-slate-800 hover:border-blue-500/50 transition-all duration-300 hover:shadow-lg hover:shadow-blue-500/10 group"
+                    >
+                      <CardHeader>
+                        <div className="flex items-start justify-between mb-2">
+                          <CardTitle className="text-white group-hover:text-blue-400 transition-colors text-lg">
+                            {project.name}
+                          </CardTitle>
+                          <ExternalLink className="h-4 w-4 text-gray-500 group-hover:text-blue-400 transition-colors flex-shrink-0 ml-2" />
+                        </div>
+                        <CardDescription className="text-gray-400 leading-relaxed text-sm">
+                          {project.description}
+                        </CardDescription>
+                      </CardHeader>
+                      <CardContent>
+                        <Button
+                          asChild
+                          variant="outline"
+                          size="sm"
+                          className="w-full border-blue-500/30 text-blue-400 hover:bg-blue-500/10 hover:text-blue-300"
+                        >
+                          <a href={project.link} target="_blank" rel="noopener noreferrer">
+                            View Project
+                          </a>
+                        </Button>
+                      </CardContent>
+                    </Card>
+                  ))}
+                </div>
+              </section>
+
+              <section id="services">
+                <h2 className="text-3xl font-black text-white mb-6 uppercase tracking-tight border-b border-slate-800 pb-4">
+                  Services & APIs
+                </h2>
+                <div className="grid md:grid-cols-2 gap-6">
+                  {ecosystemData.services.map((project, index) => (
+                    <Card
+                      key={index}
+                      className="bg-slate-900/50 border-slate-800 hover:border-blue-500/50 transition-all duration-300 hover:shadow-lg hover:shadow-blue-500/10 group"
+                    >
+                      <CardHeader>
+                        <div className="flex items-start justify-between mb-2">
+                          <CardTitle className="text-white group-hover:text-blue-400 transition-colors text-lg">
+                            {project.name}
+                          </CardTitle>
+                          <ExternalLink className="h-4 w-4 text-gray-500 group-hover:text-blue-400 transition-colors flex-shrink-0 ml-2" />
+                        </div>
+                        <CardDescription className="text-gray-400 leading-relaxed text-sm">
+                          {project.description}
+                        </CardDescription>
+                      </CardHeader>
+                      <CardContent>
+                        <Button
+                          asChild
+                          variant="outline"
+                          size="sm"
+                          className="w-full border-blue-500/30 text-blue-400 hover:bg-blue-500/10 hover:text-blue-300"
+                        >
+                          <a href={project.link} target="_blank" rel="noopener noreferrer">
+                            View Project
+                          </a>
+                        </Button>
+                      </CardContent>
+                    </Card>
+                  ))}
+                </div>
+              </section>
+
+              <section id="infrastructure">
+                <h2 className="text-3xl font-black text-white mb-6 uppercase tracking-tight border-b border-slate-800 pb-4">
+                  Infrastructure & Tooling
+                </h2>
+                <div className="grid md:grid-cols-2 gap-6">
+                  {ecosystemData.infrastructure.map((project, index) => (
+                    <Card
+                      key={index}
+                      className="bg-slate-900/50 border-slate-800 hover:border-blue-500/50 transition-all duration-300 hover:shadow-lg hover:shadow-blue-500/10 group"
+                    >
+                      <CardHeader>
+                        <div className="flex items-start justify-between mb-2">
+                          <CardTitle className="text-white group-hover:text-blue-400 transition-colors text-lg">
+                            {project.name}
+                          </CardTitle>
+                          <ExternalLink className="h-4 w-4 text-gray-500 group-hover:text-blue-400 transition-colors flex-shrink-0 ml-2" />
+                        </div>
+                        <CardDescription className="text-gray-400 leading-relaxed text-sm">
+                          {project.description}
+                        </CardDescription>
+                      </CardHeader>
+                      <CardContent>
+                        <Button
+                          asChild
+                          variant="outline"
+                          size="sm"
+                          className="w-full border-blue-500/30 text-blue-400 hover:bg-blue-500/10 hover:text-blue-300"
+                        >
+                          <a href={project.link} target="_blank" rel="noopener noreferrer">
+                            View Project
+                          </a>
+                        </Button>
+                      </CardContent>
+                    </Card>
+                  ))}
+                </div>
+              </section>
+
+              <section id="resources">
+                <h2 className="text-3xl font-black text-white mb-6 uppercase tracking-tight border-b border-slate-800 pb-4">
+                  Learning & Resources
+                </h2>
+                <div className="grid md:grid-cols-2 gap-6">
+                  {ecosystemData.resources.map((project, index) => (
+                    <Card
+                      key={index}
+                      className="bg-slate-900/50 border-slate-800 hover:border-blue-500/50 transition-all duration-300 hover:shadow-lg hover:shadow-blue-500/10 group"
+                    >
+                      <CardHeader>
+                        <div className="flex items-start justify-between mb-2">
+                          <CardTitle className="text-white group-hover:text-blue-400 transition-colors text-lg">
+                            {project.name}
+                          </CardTitle>
+                          <ExternalLink className="h-4 w-4 text-gray-500 group-hover:text-blue-400 transition-colors flex-shrink-0 ml-2" />
+                        </div>
+                        <CardDescription className="text-gray-400 leading-relaxed text-sm">
+                          {project.description}
+                        </CardDescription>
+                      </CardHeader>
+                      <CardContent>
+                        <Button
+                          asChild
+                          variant="outline"
+                          size="sm"
+                          className="w-full border-blue-500/30 text-blue-400 hover:bg-blue-500/10 hover:text-blue-300"
+                        >
+                          <a href={project.link} target="_blank" rel="noopener noreferrer">
+                            View Project
+                          </a>
+                        </Button>
+                      </CardContent>
+                    </Card>
+                  ))}
+                </div>
+              </section>
+
+              <section id="facilitators">
+                <h2 className="text-3xl font-black text-white mb-6 uppercase tracking-tight border-b border-slate-800 pb-4">
+                  Facilitators
+                </h2>
+                <div className="grid md:grid-cols-2 gap-6">
+                  {ecosystemData.facilitators.map((project, index) => (
+                    <Card
+                      key={index}
+                      className="bg-slate-900/50 border-slate-800 hover:border-blue-500/50 transition-all duration-300 hover:shadow-lg hover:shadow-blue-500/10 group"
+                    >
+                      <CardHeader>
+                        <div className="flex items-start justify-between mb-2">
+                          <CardTitle className="text-white group-hover:text-blue-400 transition-colors text-lg">
+                            {project.name}
+                          </CardTitle>
+                          <ExternalLink className="h-4 w-4 text-gray-500 group-hover:text-blue-400 transition-colors flex-shrink-0 ml-2" />
+                        </div>
+                        <CardDescription className="text-gray-400 leading-relaxed text-sm">
+                          {project.description}
+                        </CardDescription>
+                      </CardHeader>
+                      <CardContent>
+                        <Button
+                          asChild
+                          variant="outline"
+                          size="sm"
+                          className="w-full border-blue-500/30 text-blue-400 hover:bg-blue-500/10 hover:text-blue-300"
+                        >
+                          <a href={project.link} target="_blank" rel="noopener noreferrer">
+                            View Project
+                          </a>
+                        </Button>
+                      </CardContent>
+                    </Card>
+                  ))}
+                </div>
+              </section>
+            </div>
+          </main>
         </div>
       </div>
 
