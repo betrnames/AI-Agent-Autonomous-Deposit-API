@@ -150,7 +150,6 @@ export default function DocsPage() {
             <div className="space-y-12 mb-16">
               <div id="introduction" className="space-y-6">
                 <div className="flex items-center gap-3 mb-4">
-                  <Terminal className="h-6 w-6 text-blue-400" />
                   <h2 className="text-2xl font-bold text-white">Overview</h2>
                 </div>
                 <p className="text-gray-400">
