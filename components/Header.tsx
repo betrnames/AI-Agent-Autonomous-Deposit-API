@@ -47,6 +47,9 @@ export function Header() {
                 </span>
               </a>
               <div className="flex items-center gap-3 sm:gap-8 absolute right-3 sm:relative sm:right-0">
+                <a href="/ecosystem" className="text-sm font-medium text-white hover:text-blue-400 transition-colors hidden sm:inline">
+                  Ecosystem
+                </a>
                 <a href="/docs" className="text-sm font-medium text-white hover:text-blue-400 transition-colors hidden sm:inline">
                   API
                 </a>
@@ -96,6 +99,13 @@ export function Header() {
 
             <div className="flex-1 overflow-y-auto">
               <div className="flex flex-col p-6 space-y-1">
+                <a
+                  href="/ecosystem"
+                  className="text-lg font-semibold text-white hover:text-blue-400 transition-colors py-4 border-b border-blue-500/10"
+                  onClick={() => setIsMobileMenuOpen(false)}
+                >
+                  Ecosystem
+                </a>
                 <a
                   href="/docs"
                   className="text-lg font-semibold text-white hover:text-blue-400 transition-colors py-4 border-b border-blue-500/10"

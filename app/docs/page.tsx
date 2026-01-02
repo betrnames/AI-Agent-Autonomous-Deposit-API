@@ -543,6 +543,11 @@ print(f"Transaction ID: {result['transactionId']}")`,
                       </a>
                     </li>
                     <li>
+                      <a href="/ecosystem" className="text-gray-400 hover:text-white transition-colors text-sm">
+                        Ecosystem
+                      </a>
+                    </li>
+                    <li>
                       <a href="https://x402.org" target="_blank" rel="noopener noreferrer" className="text-gray-400 hover:text-white transition-colors text-sm inline-flex items-center gap-1">
                         x402 Standard
                         <ExternalLink className="h-3 w-3" />
