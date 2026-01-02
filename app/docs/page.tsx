@@ -42,14 +42,14 @@ export default function DocsPage() {
         <div className="flex gap-8">
           {/* Left Sidebar */}
           <aside className="w-56 flex-shrink-0 hidden md:block">
-            <div className="sticky top-24 py-6">
-              <h2 className="text-gray-400 text-xs font-bold uppercase tracking-wider mb-6 px-4">
+            <div className="sticky top-24">
+              <h2 className="text-white font-black text-lg mb-4 uppercase tracking-wider">
                 DOCUMENTATION
               </h2>
               <nav className="space-y-1">
                 <button
                   onClick={() => scrollToSection('introduction')}
-                  className={`w-full text-left px-4 py-2.5 rounded-lg text-sm font-medium transition-colors flex items-center gap-2 ${
+                  className={`w-full text-left px-4 py-2.5 rounded-lg text-sm font-semibold transition-colors flex items-center gap-2 ${
                     activeSection === 'introduction'
                       ? 'bg-blue-600/20 text-blue-400'
                       : 'text-gray-400 hover:text-white hover:bg-slate-800/50'
@@ -60,7 +60,7 @@ export default function DocsPage() {
                 </button>
                 <button
                   onClick={() => scrollToSection('authentication')}
-                  className={`w-full text-left px-4 py-2.5 text-sm font-medium transition-colors ${
+                  className={`w-full text-left px-4 py-2.5 text-sm font-semibold transition-colors ${
                     activeSection === 'authentication'
                       ? 'bg-blue-600/20 text-blue-400 rounded-lg'
                       : 'text-gray-400 hover:text-white hover:bg-slate-800/50 rounded-lg'
@@ -70,7 +70,7 @@ export default function DocsPage() {
                 </button>
                 <button
                   onClick={() => scrollToSection('endpoints')}
-                  className={`w-full text-left px-4 py-2.5 text-sm font-medium transition-colors ${
+                  className={`w-full text-left px-4 py-2.5 text-sm font-semibold transition-colors ${
                     activeSection === 'endpoints'
                       ? 'bg-blue-600/20 text-blue-400 rounded-lg'
                       : 'text-gray-400 hover:text-white hover:bg-slate-800/50 rounded-lg'
@@ -80,7 +80,7 @@ export default function DocsPage() {
                 </button>
                 <button
                   onClick={() => scrollToSection('examples')}
-                  className={`w-full text-left px-4 py-2.5 text-sm font-medium transition-colors ${
+                  className={`w-full text-left px-4 py-2.5 text-sm font-semibold transition-colors ${
                     activeSection === 'examples'
                       ? 'bg-blue-600/20 text-blue-400 rounded-lg'
                       : 'text-gray-400 hover:text-white hover:bg-slate-800/50 rounded-lg'
@@ -96,8 +96,8 @@ export default function DocsPage() {
           <main className="flex-1 min-w-0">
             <div className="max-w-4xl">
             {/* Header */}
-            <div className="mb-6">
-              <h1 className="text-sm font-medium text-gray-400">x402 documentation</h1>
+            <div className="mb-12">
+              <h1 className="text-4xl sm:text-5xl font-black text-white mb-4">x402 documentation</h1>
             </div>
 
             {/* Mobile Navigation Pills */}
