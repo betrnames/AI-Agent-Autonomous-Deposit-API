@@ -136,20 +136,20 @@ export default function EcosystemPage() {
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 pt-24 pb-20">
         <div className="flex gap-8">
           <aside className="hidden lg:block w-64 flex-shrink-0">
-            <div className="sticky top-24">
-              <h2 className="text-white font-black text-lg mb-4 uppercase tracking-wider">Categories</h2>
+            <div className="sticky top-24 py-6">
+              <h2 className="text-gray-400 text-xs font-bold uppercase tracking-wider mb-6 px-4">Categories</h2>
               <nav className="space-y-1">
                 {categories.map((category) => (
                   <button
                     key={category.id}
                     onClick={() => scrollToSection(category.id)}
-                    className={`w-full text-left px-4 py-3 rounded-lg transition-all duration-200 flex items-center justify-between group ${
+                    className={`w-full text-left px-4 py-2.5 rounded-lg transition-colors flex items-center justify-between group ${
                       activeSection === category.id
-                        ? 'bg-blue-600 text-white'
+                        ? 'bg-blue-600/20 text-blue-400'
                         : 'text-gray-400 hover:text-white hover:bg-slate-800/50'
                     }`}
                   >
-                    <span className="text-sm font-semibold">{category.label}</span>
+                    <span className="text-sm font-medium">{category.label}</span>
                     <Badge
                       variant="secondary"
                       className={`${
@@ -168,9 +168,10 @@ export default function EcosystemPage() {
 
           <main className="flex-1">
             <div className="mb-12">
-              <h1 className="text-4xl sm:text-5xl font-black text-white mb-4">
-                x402 Ecosystem
-              </h1>
+              <h1 className="text-sm font-medium text-gray-400 mb-2">x402 ecosystem</h1>
+              <h2 className="text-4xl sm:text-5xl font-black text-white mb-4">
+                Ecosystem Directory
+              </h2>
               <p className="text-xl text-gray-400 leading-relaxed">
                 Discover innovative projects, tools, and applications built by our growing community of partners and developers.
               </p>
@@ -178,9 +179,9 @@ export default function EcosystemPage() {
 
             <div className="space-y-16">
               <section id="clients">
-                <h2 className="text-3xl font-black text-white mb-6 uppercase tracking-tight border-b border-slate-800 pb-4">
+                <h3 className="text-2xl font-bold text-white mb-6">
                   Client Integrations
-                </h2>
+                </h3>
                 <div className="grid md:grid-cols-2 gap-6">
                   {ecosystemData.clients.map((project, index) => (
                     <Card
@@ -216,9 +217,9 @@ export default function EcosystemPage() {
               </section>
 
               <section id="services">
-                <h2 className="text-3xl font-black text-white mb-6 uppercase tracking-tight border-b border-slate-800 pb-4">
+                <h3 className="text-2xl font-bold text-white mb-6">
                   Services & APIs
-                </h2>
+                </h3>
                 <div className="grid md:grid-cols-2 gap-6">
                   {ecosystemData.services.map((project, index) => (
                     <Card
@@ -254,9 +255,9 @@ export default function EcosystemPage() {
               </section>
 
               <section id="infrastructure">
-                <h2 className="text-3xl font-black text-white mb-6 uppercase tracking-tight border-b border-slate-800 pb-4">
+                <h3 className="text-2xl font-bold text-white mb-6">
                   Infrastructure & Tooling
-                </h2>
+                </h3>
                 <div className="grid md:grid-cols-2 gap-6">
                   {ecosystemData.infrastructure.map((project, index) => (
                     <Card
@@ -292,9 +293,9 @@ export default function EcosystemPage() {
               </section>
 
               <section id="resources">
-                <h2 className="text-3xl font-black text-white mb-6 uppercase tracking-tight border-b border-slate-800 pb-4">
+                <h3 className="text-2xl font-bold text-white mb-6">
                   Learning & Resources
-                </h2>
+                </h3>
                 <div className="grid md:grid-cols-2 gap-6">
                   {ecosystemData.resources.map((project, index) => (
                     <Card
@@ -330,9 +331,9 @@ export default function EcosystemPage() {
               </section>
 
               <section id="facilitators">
-                <h2 className="text-3xl font-black text-white mb-6 uppercase tracking-tight border-b border-slate-800 pb-4">
+                <h3 className="text-2xl font-bold text-white mb-6">
                   Facilitators
-                </h2>
+                </h3>
                 <div className="grid md:grid-cols-2 gap-6">
                   {ecosystemData.facilitators.map((project, index) => (
                     <Card
