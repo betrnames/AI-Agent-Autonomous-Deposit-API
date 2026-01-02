@@ -7,7 +7,7 @@ import { Card, CardContent, CardHeader, CardTitle } from '@/components/ui/card';
 import { Tabs, TabsContent, TabsList, TabsTrigger } from '@/components/ui/tabs';
 import { Button } from '@/components/ui/button';
 import { NodeExchangeIcon } from '@/components/icons';
-import { ExternalLink, Github, Mail, Sun, ChevronRight, Copy, CheckCircle2, Terminal, Home } from 'lucide-react';
+import { ExternalLink, Github, Mail, Sun, ChevronRight, Copy, CheckCircle2, Terminal } from 'lucide-react';
 
 export default function DocsPage() {
   const [activeSection, setActiveSection] = useState('introduction');
@@ -95,14 +95,9 @@ export default function DocsPage() {
           {/* Main Content */}
           <main className="flex-1 min-w-0">
             <div className="max-w-4xl">
-            {/* Breadcrumb */}
+            {/* Header */}
             <div className="mb-6">
-              <a href="/" className="flex items-center gap-2 text-gray-400 hover:text-white transition-colors group">
-                <Home className="h-4 w-4" />
-                <span className="text-sm font-medium">Home</span>
-                <ChevronRight className="h-4 w-4" />
-                <span className="text-sm font-medium text-white">Documentation</span>
-              </a>
+              <h1 className="text-sm font-medium text-gray-400">x402 documentation</h1>
             </div>
 
             {/* Mobile Navigation Pills */}
