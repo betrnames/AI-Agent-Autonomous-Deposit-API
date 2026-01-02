@@ -133,9 +133,9 @@ export default function EcosystemPage() {
     <div className="min-h-screen bg-gradient-to-br from-slate-900 via-blue-950 to-slate-900">
       <Header />
 
-      <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 pt-24 pb-20">
+      <div className="max-w-7xl mx-auto px-6 sm:px-8 py-16">
         <div className="flex gap-8">
-          <aside className="hidden lg:block w-64 flex-shrink-0">
+          <aside className="w-56 flex-shrink-0 hidden md:block">
             <div className="sticky top-24 py-6">
               <h2 className="text-gray-400 text-xs font-bold uppercase tracking-wider mb-6 px-4">Categories</h2>
               <nav className="space-y-1">
@@ -166,7 +166,8 @@ export default function EcosystemPage() {
             </div>
           </aside>
 
-          <main className="flex-1">
+          <main className="flex-1 min-w-0">
+            <div className="max-w-4xl">
             <div className="mb-12">
               <h1 className="text-sm font-medium text-gray-400 mb-2">x402 ecosystem</h1>
               <h2 className="text-2xl font-bold text-white mb-4">
@@ -367,6 +368,7 @@ export default function EcosystemPage() {
                   ))}
                 </div>
               </section>
+            </div>
             </div>
           </main>
         </div>
