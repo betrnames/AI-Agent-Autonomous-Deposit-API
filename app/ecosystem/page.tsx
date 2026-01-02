@@ -169,7 +169,7 @@ export default function EcosystemPage() {
           <main className="flex-1">
             <div className="mb-12">
               <h1 className="text-sm font-medium text-gray-400 mb-2">x402 ecosystem</h1>
-              <h2 className="text-4xl sm:text-5xl font-black text-white mb-4">
+              <h2 className="text-2xl font-bold text-white mb-4">
                 Ecosystem Directory
               </h2>
               <p className="text-xl text-gray-400 leading-relaxed">
