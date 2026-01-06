@@ -1,17 +1,13 @@
-// app/waitlist/route.ts
+// app/waitlist/route.ts (updated top part)
 import { NextRequest, NextResponse } from 'next/server';
-import { createClient } from '@supabase/supabase-js'; // fallback if no server client
+import { createClient } from '@supabase/supabase-js';  // ← Use this public client
 
-// Optional: Use server client for better security (recommended)
-import { createClient as createServerClient } from '@/lib/supabase/server'; // adjust path if needed
+const supabase = createClient(
+  process.env.NEXT_PUBLIC_SUPABASE_URL!,
+  process.env.NEXT_PUBLIC_SUPABASE_ANON_KEY!
+);
 
-const supabase = process.env.SUPABASE_SERVICE_ROLE_KEY 
-  ? createServerClient() // if you have service role (admin)
-  : createClient(
-      process.env.NEXT_PUBLIC_SUPABASE_URL!,
-      process.env.NEXT_PUBLIC_SUPABASE_ANON_KEY!
-    );
-
+// ... rest of your POST function remains the same ...
 export async function POST(request: NextRequest) {
   try {
     const body = await request.json();
