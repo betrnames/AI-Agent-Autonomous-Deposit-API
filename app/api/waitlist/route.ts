@@ -1,13 +1,11 @@
-// app/waitlist/route.ts (updated top part)
 import { NextRequest, NextResponse } from 'next/server';
-import { createClient } from '@supabase/supabase-js';  // ← Use this public client
+import { createClient } from '@supabase/supabase-js';
 
 const supabase = createClient(
   process.env.NEXT_PUBLIC_SUPABASE_URL!,
   process.env.NEXT_PUBLIC_SUPABASE_ANON_KEY!
 );
 
-// ... rest of your POST function remains the same ...
 export async function POST(request: NextRequest) {
   try {
     const body = await request.json();
@@ -17,21 +15,22 @@ export async function POST(request: NextRequest) {
       return NextResponse.json({ error: 'Email is required' }, { status: 400 });
     }
 
-    // Trim and lowercase for consistency
     email = email.trim().toLowerCase();
 
     if (!/^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(email)) {
-      return NextResponse.json({ error: 'Valid email address is required' }, { status: 400 });
+      return NextResponse.json({ error: 'Please enter a valid email address' }, { status: 400 });
     }
 
-    const insertData = { email };
-    if (referral_source) insertData.referral_source = referral_source;
+    // Explicitly define type so TS allows optional referral_source
+    const insertData: { email: string; referral_source?: string } = { email };
 
-    const { data, error } = await supabase
+    if (referral_source) {
+      insertData.referral_source = referral_source;
+    }
+
+    const { error } = await supabase
       .from('waitlist')
-      .insert([insertData])
-      .select()
-      .maybeSingle();
+      .insert([insertData]);
 
     if (error) {
       if (error.code === '23505') { // unique violation
