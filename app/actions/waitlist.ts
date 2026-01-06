@@ -1,7 +1,12 @@
 // app/actions/waitlist.ts
 'use server';
 
-import { createClient } from '@/lib/supabase/server'; // adjust path if your supabase client is elsewhere
+import { createClient } from '@supabase/supabase-js';
+
+const supabase = createClient(
+  process.env.NEXT_PUBLIC_SUPABASE_URL!,
+  process.env.NEXT_PUBLIC_SUPABASE_ANON_KEY!
+);
 
 export async function addToWaitlist(prevState: any, formData: FormData) {
   const email = formData.get('email')?.toString().trim().toLowerCase();
