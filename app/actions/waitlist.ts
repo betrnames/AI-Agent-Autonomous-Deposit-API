@@ -19,12 +19,14 @@ export async function addToWaitlist(prevState: any, formData: FormData) {
     return { error: 'Please enter a valid email address' };
   }
 
-  const supabase = createClient();
+  const supabase = createClient(
+    process.env.NEXT_PUBLIC_SUPABASE_URL!,
+    process.env.NEXT_PUBLIC_SUPABASE_ANON_KEY!
+  );
 
   const { error } = await supabase
     .from('waitlist')
-    .insert([{ email }])
-    .select();
+    .insert([{ email }]);
 
   if (error) {
     if (error.code === '23505') { // unique violation
