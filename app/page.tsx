@@ -12,7 +12,7 @@ export default function Home() {
   const [email, setEmail] = useState('');
   const [isSubmitting, setIsSubmitting] = useState(false);
   const [isSubmitted, setIsSubmitted] = useState(false);
-  const [error, setError] = useState('');
+  const [error, setError] = useState<string | null>(null);
   const [isScrolled, setIsScrolled] = useState(false);
   const [isMobileMenuOpen, setIsMobileMenuOpen] = useState(false);
   const [showStickyCta, setShowStickyCta] = useState(false);
@@ -41,10 +41,10 @@ export default function Home() {
   const handleSubmit = async (e: React.FormEvent) => {
     e.preventDefault();
     setIsSubmitting(true);
-    setError('');
+    setError(null);
 
     try {
-      const response = await fetch('/api/waitlist', {
+      const response = await fetch('/waitlist', {
         method: 'POST',
         headers: { 'Content-Type': 'application/json' },
         body: JSON.stringify({ email }),
@@ -170,39 +170,39 @@ export default function Home() {
             </p>
 
             {!isSubmitted ? (
-              <form onSubmit={handleSubmit} className="max-w-2xl mx-auto mb-12">
-                <div className="flex border border-blue-400/30 rounded-2xl p-2 gap-2">
-                  <Input
-                    type="email"
-                    placeholder="enter email..."
-                    value={email}
-                    onChange={(e) => setEmail(e.target.value)}
-                    required
-                    className="flex-1 bg-slate-900/60 border-0 text-white placeholder:text-gray-400 h-12 text-base px-4 focus-visible:ring-0 focus-visible:ring-offset-0"
-                  />
-                  <Button
-                    type="submit"
-                    disabled={isSubmitting}
-                    className="bg-blue-600 hover:bg-blue-700 text-white font-black text-[10px] uppercase tracking-wider px-8 h-12 rounded-md"
-                  >
-                    {isSubmitting ? 'Joining...' : 'Join the Waitlist'}
-                  </Button>
-                </div>
-                {error && <p className="text-sm text-red-400 mt-3 text-left">{error}</p>}
-              </form>
-            ) : (
-              <div className="max-w-2xl mx-auto mb-12">
-                <Card className="bg-green-500/10 border-green-500/20">
-                  <CardContent className="pt-6 text-center">
-                    <CheckCircle2 className="h-8 w-8 text-green-500 mx-auto mb-2" />
-                    <p className="text-green-500 font-medium">You're on the list!</p>
-                    <p className="text-sm text-gray-400 mt-1">
-                      We'll notify you when beta launches
-                    </p>
-                  </CardContent>
-                </Card>
-              </div>
-            )}
+  <form onSubmit={handleSubmit} className="max-w-2xl mx-auto mb-12">
+    <div className="flex border border-blue-400/30 rounded-2xl p-2 gap-2">
+      <Input
+        type="email"
+        placeholder="enter email..."
+        value={email}
+        onChange={(e) => setEmail(e.target.value)}
+        required
+        className="flex-1 bg-slate-900/60 border-0 text-white placeholder:text-gray-400 h-12 text-base px-4 focus-visible:ring-0 focus-visible:ring-offset-0"
+      />
+      <Button
+        type="submit"
+        disabled={isSubmitting}
+        className="bg-blue-600 hover:bg-blue-700 text-white font-black text-[10px] uppercase tracking-wider px-8 h-12 rounded-md"
+      >
+        {isSubmitting ? 'Joining...' : 'Join the Waitlist'}
+      </Button>
+    </div>
+    {error && <p className="text-sm text-red-400 mt-3 text-left">{error}</p>}
+  </form>
+) : (
+  <div className="max-w-2xl mx-auto mb-12">
+    <Card className="bg-green-500/10 border-green-500/20">
+      <CardContent className="pt-6 text-center">
+        <CheckCircle2 className="h-8 w-8 text-green-500 mx-auto mb-2" />
+        <p className="text-green-500 font-medium">You're on the list!</p>
+        <p className="text-sm text-gray-400 mt-1">
+          We'll notify you when beta launches
+        </p>
+      </CardContent>
+    </Card>
+  </div>
+)}
 
             <div className="flex justify-center items-center gap-4 sm:gap-8 text-xs sm:text-sm text-gray-500 uppercase tracking-wider font-medium py-4 sm:py-0">
               <div className="flex items-center gap-2 whitespace-nowrap">
@@ -449,31 +449,31 @@ export default function Home() {
       </footer>
 
       {showStickyCta && !isSubmitted && (
-        <div className="fixed bottom-0 left-0 right-0 z-40 transition-all duration-300 animate-in slide-in-from-bottom md:hidden">
-          <div className="bg-slate-900/95 backdrop-blur-xl border-t border-blue-500/30 shadow-2xl">
-            <div className="max-w-4xl mx-auto sm:px-6 lg:px-8">
-              <form onSubmit={handleSubmit} className="flex gap-0">
-                <Input
-                  type="email"
-                  placeholder="enter email..."
-                  value={email}
-                  onChange={(e) => setEmail(e.target.value)}
-                  required
-                  className="flex-1 bg-slate-800/60 border-blue-400/30 text-white placeholder:text-gray-400 h-14 text-base px-4 focus-visible:ring-1 focus-visible:ring-blue-500 rounded-none border-r-0"
-                />
-                <Button
-                  type="submit"
-                  disabled={isSubmitting}
-                  className="bg-blue-600 hover:bg-blue-700 text-white font-black text-[10px] uppercase tracking-wider px-8 h-14 rounded-none whitespace-nowrap"
-                >
-                  {isSubmitting ? 'Joining...' : 'Join the Waitlist'}
-                </Button>
-              </form>
-              {error && <p className="text-sm text-red-400 mt-2 px-4">{error}</p>}
-            </div>
-          </div>
-        </div>
-      )}
+  <div className="fixed bottom-0 left-0 right-0 z-40 transition-all duration-300 animate-in slide-in-from-bottom md:hidden">
+    <div className="bg-slate-900/95 backdrop-blur-xl border-t border-blue-500/30 shadow-2xl">
+      <div className="max-w-4xl mx-auto sm:px-6 lg:px-8">
+        <form onSubmit={handleSubmit} className="flex gap-0">
+          <Input
+            type="email"
+            placeholder="enter email..."
+            value={email}
+            onChange={(e) => setEmail(e.target.value)}
+            required
+            className="flex-1 bg-slate-800/60 border-blue-400/30 text-white placeholder:text-gray-400 h-14 text-base px-4 focus-visible:ring-1 focus-visible:ring-blue-500 rounded-none border-r-0"
+          />
+          <Button
+            type="submit"
+            disabled={isSubmitting}
+            className="bg-blue-600 hover:bg-blue-700 text-white font-black text-[10px] uppercase tracking-wider px-8 h-14 rounded-none whitespace-nowrap"
+          >
+            {isSubmitting ? 'Joining...' : 'Join the Waitlist'}
+          </Button>
+        </form>
+        {error && <p className="text-sm text-red-400 mt-2 px-4">{error}</p>}
+      </div>
+    </div>
+  </div>
+)}
     </div>
   );
 }

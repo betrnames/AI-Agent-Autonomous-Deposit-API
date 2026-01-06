@@ -9,7 +9,7 @@ export const metadata: Metadata = {
     description: 'Let AI agents deposit funds autonomously via x402 — no accounts, instant stablecoin payments',
     images: [
       {
-        url: 'https://i.imgur.com/JJxCGFQ.jpg',
+        url: 'https://i.imgur.com/8vHqZEy.jpg',
       },
     ],
   },
@@ -19,7 +19,7 @@ export const metadata: Metadata = {
     description: 'The first public API for AI agents to autonomously deposit funds',
     images: [
       {
-        url: 'https://i.imgur.com/JJxCGFQ.jpg',
+        url: 'https://i.imgur.com/8vHqZEy.jpg',
       },
     ],
   },
