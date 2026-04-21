@@ -9,7 +9,7 @@ export const metadata: Metadata = {
     description: 'Let AI agents deposit funds autonomously via x402 — no accounts, instant stablecoin payments',
     images: [
       {
-        url: 'https://i.imgur.com/8vHqZEy.jpg',
+        url: 'https://bolt.new/static/og_default.png',
       },
     ],
   },
@@ -19,7 +19,7 @@ export const metadata: Metadata = {
     description: 'The first public API for AI agents to autonomously deposit funds',
     images: [
       {
-        url: 'https://i.imgur.com/8vHqZEy.jpg',
+        url: 'https://bolt.new/static/og_default.png',
       },
     ],
   },
@@ -33,36 +33,11 @@ export default function RootLayout({
   return (
     <html lang="en" className="dark">
       <head>
-        {/* Favicon */}
-        <link rel="icon" href="/favicon.ico" />
-        {/* Apple Touch Icon & modern fallback */}
-        <link rel="icon" type="image/png" sizes="32x32" href="/icon.png" />
-        <link rel="apple-touch-icon" sizes="180x180" href="/icon.png" />
-        {/* Google Fonts */}
         <link rel="preconnect" href="https://fonts.googleapis.com" />
         <link rel="preconnect" href="https://fonts.gstatic.com" crossOrigin="anonymous" />
-        <link
-          href="https://fonts.googleapis.com/css2?family=Inter:wght@100;200;300;400;500;600;700;800;900&display=swap"
-          rel="stylesheet"
-        />
-
-        {/* Google tag (gtag.js) - your exact Analytics code */}
-        <script async src="https://www.googletagmanager.com/gtag/js?id=G-HQB6Y3W5ER"></script>
-        <script
-          dangerouslySetInnerHTML={{
-            __html: `
-              window.dataLayer = window.dataLayer || [];
-              function gtag(){dataLayer.push(arguments);}
-              gtag('js', new Date());
-
-              gtag('config', 'G-HQB6Y3W5ER');
-            `,
-          }}
-        />
+        <link href="https://fonts.googleapis.com/css2?family=Inter:wght@100;200;300;400;500;600;700;800;900&display=swap" rel="stylesheet" />
       </head>
-      <body className="font-sans antialiased">
-        {children}
-      </body>
+      <body className="font-sans antialiased">{children}</body>
     </html>
   );
 }
